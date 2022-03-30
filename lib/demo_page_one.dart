@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:test_irebase2/mydata.dart';
 
 class DemoPageOne extends StatelessWidget {
   const DemoPageOne({Key? key}) : super(key: key);
@@ -9,7 +11,7 @@ class DemoPageOne extends StatelessWidget {
       appBar: AppBar(title: const Text("This is Page One")),
       body: Center(
           child: Text(
-        "Demo",
+        "${context.watch<DemoData>().count}",
         style: Theme.of(context).textTheme.headline4,
       )),
     );

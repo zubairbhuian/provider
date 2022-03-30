@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:test_irebase2/demo_page_one.dart';
 import 'package:test_irebase2/demo_page_two.dart';
+import 'package:test_irebase2/mydata.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => DemoData(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +33,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(
-            "Demo",
+            "${context.watch<DemoData>().count}",
             style: Theme.of(context).textTheme.headline4,
           ),
           const SizedBox(
@@ -51,7 +56,9 @@ class HomePage extends StatelessWidget {
         ]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          context.read<DemoData>().incriment();
+        },
         child: const Icon(Icons.add),
       ),
     );
