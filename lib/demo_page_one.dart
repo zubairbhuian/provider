@@ -14,6 +14,12 @@ class DemoPageOne extends StatelessWidget {
         "${context.watch<DemoData>().count}",
         style: Theme.of(context).textTheme.headline4,
       )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context.read<DemoData>().incriment();
+        },
+        child: const Icon(Icons.add),
+      )
     );
   }
 }

@@ -8,10 +8,15 @@ class DemoPageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("This is Page Two")),
-      body: Center(
-          child: Text("${context.watch<DemoData>().count}",
-              style: Theme.of(context).textTheme.headline4)),
-    );
+        appBar: AppBar(title: const Text("This is Page Two")),
+        body: Center(
+            child: Text("${context.watch<DemoData>().count}",
+                style: Theme.of(context).textTheme.headline4)),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            context.read<DemoData>().incriment();
+          },
+          child: const Icon(Icons.add),
+        ));
   }
 }
