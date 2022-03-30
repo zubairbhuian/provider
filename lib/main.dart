@@ -1,21 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:test_irebase2/demo_page_one.dart';
+import 'package:test_irebase2/demo_page_two.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(
-    create: (context) => Counter(),
-    child: const MyApp(),
-  ));
-}
-
-//  !Provider Demo Test Class
-class Counter extends ChangeNotifier {
-  var _count = 0;
-  int get count => _count;
-  void increment() {
-    _count++;
-    notifyListeners();
-  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,58 +13,42 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(child: HomePage()),
     );
   }
 }
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Example'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const <Widget>[
-            Text('You have pushed the button this many times:'),
-
-            /// Extracted as a separate widget for performance optimization.
-            /// As a separate widget, it will rebuild independently from [MyHomePage].
-            ///
-            /// This is totally optional (and rarely needed).
-            /// Similarly, we could also use [Consumer] or [Selector].
-            Count(),
-          ],
+      body: Column(children: [
+        const Text("Demo"),
+        const SizedBox(
+          height: 20,
         ),
-      ),
+        Row(children: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => const DemoPageOne()));
+              },
+              icon: const Icon(Icons.arrow_back)),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    CupertinoPageRoute(builder: (_) => const DemoPageTwo()));
+              },
+              icon: const Icon(Icons.arrow_forward)),
+        ])
+      ]),
       floatingActionButton: FloatingActionButton(
-        key: const Key('increment_floatingActionButton'),
-
-        /// Calls `context.read` instead of `context.watch` so that it does not rebuild
-        /// when [Counter] changes.
-        onPressed: () => context.read<Counter>().increment(),
-        tooltip: 'Increment',
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
     );
-  }
-}
-
-class Count extends StatelessWidget {
-  const Count({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-
-        /// Calls `context.watch` to make [Count] rebuild when [Counter] changes.
-        '${context.watch<Counter>().count}',
-        key: const Key('counterState'),
-        style: Theme.of(context).textTheme.headline4);
   }
 }
