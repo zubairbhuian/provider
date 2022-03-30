@@ -6,8 +6,9 @@ class DemoPageTwo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("This is Page One")),
-      body: const Center(child: Text("Demo")),
+      appBar: AppBar(title: const Text("This is Page Two")),
+      body: Center(
+          child: Text("Demo", style: Theme.of(context).textTheme.headline4)),
     );
   }
 }

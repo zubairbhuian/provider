@@ -25,26 +25,31 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: [
-        const Text("Demo"),
-        const SizedBox(
-          height: 20,
-        ),
-        Row(children: [
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => const DemoPageOne()));
-              },
-              icon: const Icon(Icons.arrow_back)),
-          IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    CupertinoPageRoute(builder: (_) => const DemoPageTwo()));
-              },
-              icon: const Icon(Icons.arrow_forward)),
-        ])
-      ]),
+      body: Center(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Text(
+            "Demo",
+            style: Theme.of(context).textTheme.headline4,
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (_) => const DemoPageOne()));
+                },
+                child: const Icon(Icons.arrow_back)),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      CupertinoPageRoute(builder: (_) => const DemoPageTwo()));
+                },
+                child: const Icon(Icons.arrow_forward)),
+          ])
+        ]),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: const Icon(Icons.add),

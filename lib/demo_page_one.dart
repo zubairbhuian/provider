@@ -7,7 +7,11 @@ class DemoPageOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("This is Page One")),
-      body: const Center(child: Text("Demo")),
+      body: Center(
+          child: Text(
+        "Demo",
+        style: Theme.of(context).textTheme.headline4,
+      )),
     );
   }
 }
